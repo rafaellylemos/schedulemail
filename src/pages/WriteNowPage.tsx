@@ -1,4 +1,4 @@
-import { Button, Nav } from "components";
+import { Button, Nav, RichInput } from "components";
 
 export function WriteNowPage() {
   return (
@@ -7,12 +7,12 @@ export function WriteNowPage() {
         <div className="container">
             <h1>Escrever Agora</h1>
 
-            <form>
+            <form className="form">
               <label htmlFor="destinationName">Nome completo</label>
               <input type="text" />
 
               <label htmlFor="destinationAddress">E-mail</label>
-              <input type="text" />
+              <input type="email" />
 
               <label htmlFor="dueDate">Data</label>
               <input type="text" />
@@ -21,9 +21,12 @@ export function WriteNowPage() {
               <input type="text" />
 
               <label htmlFor="body">Mensagem</label>
-              <input type="text" />
+              <RichInput />
+              <Button type="submit" variant="primary">
+                Enviar
+              </Button>
 
-              <Button type="submit">Enviar</Button>
+              <Button type="submit" variant="primary">Enviar</Button>
             </form>
         </div>
     </>
