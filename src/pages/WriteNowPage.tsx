@@ -1,34 +1,42 @@
-import { Button, Nav, RichInput } from "components";
+import { Button, DateTimePicker, Nav, RichInput } from "components";
+import { FormProvider, useForm } from "react-hook-form";
 
 export function WriteNowPage() {
+  const formMethods = useForm();
+  const { register, handleSubmit } = formMethods;
+
+  function onSubmit(values: any) {
+    console.log('Dados do formulário:', values);
+  }
+
   return (
     <>
       <Nav />
         <div className="container">
             <h1>Escrever Agora</h1>
 
-            <form className="form">
-              <label htmlFor="destinationName">Nome completo</label>
-              <input type="text" />
+            <FormProvider {...formMethods}>
+              <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor="destinationName">Nome completo</label>
+                <input {...register('destinationName')} type="text" />
 
-              <label htmlFor="destinationAddress">E-mail</label>
-              <input type="email" />
+                <label htmlFor="destinationAddress">E-mail</label>
+                <input {...register('destinationAddress')} type="email" />
 
-              <label htmlFor="dueDate">Data</label>
-              <input type="text" />
+                <label htmlFor="dueDate">Data</label>
+                <DateTimePicker name="dueDate" />
 
-              <label htmlFor="subject">Assunto</label>
-              <input type="text" />
+                <label htmlFor="subject">Assunto</label>
+                <input {...register('subject')} type="text" />
 
-              <label htmlFor="body">Mensagem</label>
-              <RichInput />
-              <Button type="submit" variant="primary">
-                Enviar
-              </Button>
-
-              <Button type="submit" variant="primary">Enviar</Button>
-            </form>
+                <label htmlFor="body">Mensagem</label>
+                <RichInput name="body" />
+                <Button type="submit" variant="primary">
+                  Enviar
+                </Button>
+              </form>
+            </FormProvider>
         </div>
     </>
-  )
+  );
 }
